@@ -34,7 +34,7 @@ Wir haben den Datensatz erst sauber gemacht — besonders die Marke **Pack**, di
 
 ## Conclusion — Was wir empfehlen
 
-**1. Rabatt bei 【entity-Apple¦canonical_name=Apple】 nicht streichen, sondern kontrollieren.** Von 11,1% auf 10,1% senken und testen. Ein Prozentpunkt spart ca. **105.000 €**. Puffer: 4 von 100 Käufern dürfen abspringen, ohne Umsatzverlust.
+**1. Rabatt bei Apple nicht streichen, sondern kontrollieren.** Von 11,1% auf 10,1% senken und testen. Ein Prozentpunkt spart ca. **105.000 €**. Puffer: 4 von 100 Käufern dürfen abspringen, ohne Umsatzverlust.
 
 **2. Bei Zubehör nicht mehr Rabatt geben.** Zubehör hat schon 26,5% Rabatt und bringt nur 3,2% Umsatz.
 
