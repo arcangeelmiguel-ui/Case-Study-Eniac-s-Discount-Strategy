@@ -32,10 +32,10 @@ Das ist der entscheidende Schritt in dieser Analyse. Wer nach Präfix gruppiert,
 `PAC` stand für 1.396 Produkte. Nach Bereinigung:
 
 - 829–894 echte Bundles, z. B. Synology NAS + Seagate
-- 506 konfigurierte 【entity-Apple¦canonical_name=Apple】 MacBooks
+- 506 konfigurierte MacBooks
 - Rest: sonstige konfigurierte Produkte
 
-**Konsequenz:** Pack ist kein Brand. Pack ist ein Bundle-Geschäft. Wer Pack als Marke lässt, überschätzt Pack und unterschätzt 【entity-Apple¦canonical_name=Apple】.
+**Konsequenz:** Pack ist kein Brand. Pack ist ein Bundle-Geschäft. Wer Pack als Marke lässt, überschätzt Pack und unterschätzt.
 
 ---
 
@@ -46,7 +46,7 @@ Das ist der entscheidende Schritt in dieser Analyse. Wer nach Präfix gruppiert,
 - 8 Marken tragen 80% des Umsatzes
 - 34 Marken tragen 80% der Stückzahl
 
-Ein 【entity-Mac¦canonical_name=Mac】 liegt bei rund 2.000 €. Ein Kabel bei rund 10 €. Wer nur Stückzahl betrachtet, sieht das Geschäft nicht.
+Ein Macbook liegt bei rund 2.000 €. Ein Kabel bei rund 10 €. Wer nur Stückzahl betrachtet, sieht das Geschäft nicht.
 
 ### 2. Rabatt verläuft gegenläufig zum Umsatz
 
@@ -88,21 +88,13 @@ Bei MacBooks fast kein Rabatt. Bei Synology 2,8%. Das ist das Markenbild.
 
 | Datei | Inhalt |
 | :--- | :--- |
-| `Eniac_Discount-Strategy_Presentation_2026-11-13_vFinal.pdf` | Präsentation — Folien, Abbildungen, Empfehlung |
+| `Eniac_Discount-Strategy_Presentation_2026-11-13_vpdf` | Präsentation — Folien, Abbildungen, Empfehlung |
 | `Eniac_Discount-Strategy_Pilot_2026-11-13_vFinal.ipynb` | Pilot in Google Colab — Code, Checks, Pareto, Rabatt-Analyse, Code für alle Abbildungen der Präsentation |
 | `data / alle_marken_180.csv` | Alle 180 Marken nach bereinigter Marke, mit Umsatz und Stückzahl |
 
 > Abgrenzung: Ausgewiesen wird Umsatz und Rabattgeld, nicht Gewinn. Ohne Einkaufspreise ist kein Gewinn berechenbar.
 
-## Lesehinweis
 
-2 Minuten: Tabelle unter „Drei Befunde" lesen.
-10 Minuten: Folie 9 (Markenverteilung), Folie 10 (Preisklasse), Folie 11 (Apple Rabattgeld) ansehen. Dort steht die gesamte Argumentation.
 
 ---
 
-## Danksagung
-
-Persönlich war die Sprache die größte Herausforderung.
-Ich habe viel Hilfe von Tim und Walter bekommen. Ohne sie wäre das nicht gegangen.
-Wir haben als Team gut gearbeitet. Manchmal haben wir uns auch außerhalb der Stunden getroffen. Das war notwendig und produktiv. Und es hat sich gelohnt.
