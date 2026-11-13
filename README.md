@@ -4,55 +4,100 @@
 
 Dieses Projekt entstand im Rahmen des **DSAI-Kurses von WBS Coding**.
 
-Es wurde ein Datensatz der **fiktiven Firma Eniac** bereinigt und analysiert, um die Rabatt-Strategie des Unternehmens nachzuvollziehen und zu verbessern.
+Analysiert wurde ein Datensatz der **fiktiven Firma ENIAC**. Der Datensatz wurde bereinigt und ausgewertet, um die Rabatt-Strategie des Unternehmens nachzuvollziehen und zu verbessern.
 
-**Frage:** Kosten Rabatte uns Umsatz und Ruf?
+**Leitfrage:** Kosten Rabatte uns Umsatz und Ruf?
 
-**Datenbasis:** 46.605 saubere Bestellungen, 9.992 Produkte im Katalog, ~14,4 Mio. € Umsatz in der Analyse.
+**Datenbasis**
+- 46.605 bereinigte Bestellzeilen
+- 9.992 Produkte im Katalog
+- 14,4 Mio. € Umsatz in der Analyse
+- 180 Marken nach Bereinigung
 
-**Methode:** Umsatz je Zeile = `unit_price × product_quantity`. Rabatt je Zeile = `1 − unit_price / price`. Danach gruppiert nach echter Marke, Preisklasse und Produktkategorie.
+**Berechnungslogik**
+- Umsatz je Zeile = `unit_price × product_quantity`
+- Rabatt je Zeile = `1 − unit_price / price`
+- Gruppierung nach bereinigter Marke, Preisklasse und Produktkategorie
 
 ---
 
-## Was das hier ist — und was nicht
+## Was hier anders gemacht wurde
 
-Das ist **kein Schulbeispiel mit erfundenen Zahlen.** Das ist eine echte Übung mit echten Transaktionsdaten von Eniac: was wirklich verkauft wurde, zu welchem Preis, mit welchem Rabatt.
+Nicht nach SKU-Präfix gruppiert. Sondern nach tatsächlicher Marke.
 
-Wir haben den Datensatz erst sauber gemacht — besonders die Marke **Pack**, die keine Marke ist, sondern ein Bundle — und dann gefragt: Wo verlieren wir Marge? Wo schützen wir das Markenbild? Und wo ist Rabatt eigentlich Investition?
+Das ist der entscheidende Schritt in dieser Analyse. Wer nach Präfix gruppiert, zählt Bundles als Marke und konfigurierte Produkte als Zubehör. Das Ergebnis ist dann falsch, auch wenn die Berechnung stimmt.
 
-> **WICHTIG: Pack wurde korrigiert.** PAC war 1.396 Produkte. Davon sind nur 829–894 echte Bundles (z.B. Synology NAS + Seagate). 506 sind konfigurierte 【entity-Apple¦canonical_name=Apple】 MacBooks. Wer Pack als Marke lässt, überschätzt Pack und unterschätzt 【entity-Apple¦canonical_name=Apple】.
+**Korrektur: Pack**
 
-## Die drei Befunde, die alles entscheiden
+`PAC` stand für 1.396 Produkte. Nach Bereinigung:
 
-| Befund | Zahl | Was es heisst |
+- 829–894 echte Bundles, z. B. Synology NAS + Seagate
+- 506 konfigurierte 【entity-Apple¦canonical_name=Apple】 MacBooks
+- Rest: sonstige konfigurierte Produkte
+
+**Konsequenz:** Pack ist kein Brand. Pack ist ein Bundle-Geschäft. Wer Pack als Marke lässt, überschätzt Pack und unterschätzt 【entity-Apple¦canonical_name=Apple】.
+
+---
+
+## Drei Befunde
+
+### 1. Wert ist konzentriert, Menge ist verteilt
+
+- 8 Marken tragen 80% des Umsatzes
+- 34 Marken tragen 80% der Stückzahl
+
+Ein 【entity-Mac¦canonical_name=Mac】 liegt bei rund 2.000 €. Ein Kabel bei rund 10 €. Wer nur Stückzahl betrachtet, sieht das Geschäft nicht.
+
+### 2. Rabatt verläuft gegenläufig zum Umsatz
+
+| Preisklasse | Rabatt | Anteil am Umsatz |
 | :--- | :--- | :--- |
-| **1. Wert ist konzentriert, Menge ist verteilt** | 8 Marken = 80% Umsatz<br>34 Marken = 80% Stück | Wer nur auf Stück schaut, sieht das Geschäft nicht. Ein Mac = 2.000 €, ein Kabel = 10 €. |
-| **2. Der Rabatt ist umgekehrt zum Umsatz** | Unter 50 €: 26,5% Rabatt, nur 3,2% Umsatz<br>Über 1.000 €: 11,1% Rabatt, 47,2% Umsatz | Viel Rabatt, wo wenig Geld ist. Wenig Rabatt, wo viel Geld ist. Das schützt das Premium-Bild. |
-| **3. 【entity-Apple¦canonical_name=Apple】 ist die Investition, nicht der Verlust** | 60,7% Umsatz, 23,8% Stück<br>11,1% Rabatt, aber 48% vom gesamten Rabattgeld = 1,17 Mio. € | 11% von 9,2 Mio. € sind mehr Geld als 74% von Jawbone. Prozent täuscht, Euro nicht. |
+| Unter 50 € | 26,5% | 3,2% |
+| Über 1.000 € | 11,1% | 47,2% |
 
-## Conclusion — Was wir empfehlen
+Viel Rabatt, wo wenig Umsatz entsteht. Wenig Rabatt, wo viel Umsatz entsteht. Das schützt das Premium-Bild.
 
-**1. Rabatt bei 【entity-Apple¦canonical_name=Apple】 nicht streichen, sondern kontrollieren.** Von 11,1% auf 10,1% senken und testen. Ein Prozentpunkt spart ca. **105.000 €**. Puffer: 4 von 100 Käufern dürfen abspringen, ohne Umsatzverlust.
+### 3. Apple ist Investition, kein Verlust
 
-**2. Bei Zubehör nicht mehr Rabatt geben.** Zubehör hat schon 26,5% Rabatt und bringt nur 3,2% Umsatz.
+- 60,7% des Umsatzes
+- 23,8% der Stückzahl
+- 11,1% Rabatt
+- 48% des gesamten Rabattgeldes = 1,17 Mio. €
 
-**3. Pack separat steuern.** Pack ist kein Brand. Es ist ein Bundle-Geschäft mit 14,6% gewichtetem Rabatt.
+11% von 9,2 Mio. € sind mehr Geld als 74% von Jawbone. Prozent täuscht. Euro nicht.
 
-**4. Ruf schützen, wo es zählt.** Bei MacBooks fast kein Rabatt. Bei Synology nur 2,8%. Das ist das Markenbild.
+---
 
-## Dateien in diesem Repo
+## Empfehlung
 
-| Datei | Was drin ist |
+**1. Apple-Rabatt kontrollieren, nicht streichen.**
+Von 11,1% auf 10,1% senken und testen. Ein Prozentpunkt entspricht ca. 105.000 €. Puffer: 4 von 100 Käufern dürfen abspringen, ohne Umsatzverlust.
+
+**2. Zubehör nicht weiter rabattieren.**
+Zubehör trägt bereits 26,5% Rabatt und nur 3,2% Umsatz.
+
+**3. Pack separat steuern.**
+Pack ist kein Brand. Es ist ein Bundle-Geschäft mit 14,6% gewichtetem Rabatt.
+
+**4. Ruf schützen, wo er entsteht.**
+Bei MacBooks fast kein Rabatt. Bei Synology 2,8%. Das ist das Markenbild.
+
+---
+
+## Dateien
+
+| Datei | Inhalt |
 | :--- | :--- |
-| `Eniac_Discount-Strategy_Presentation_2026-11-13_vFinal.pdf` | Die Präsentation — Folien, Grafiken, Empfehlung |
-| `Eniac_Discount-Strategy_Pilot_2026-11-13_vFinal.ipynb` | Der Pilot in Google Colab — Code, Checks, Pareto, Rabatt-Analyse, **Code für alle Abbildungen der Präsentation** |
-| `data / alle_marken_180.csv` | Alle 180 Marken nach echter Marke, mit Umsatz und Menge |
+| `Eniac_Discount-Strategy_Presentation_2026-11-13_vFinal.pdf` | Präsentation — Folien, Abbildungen, Empfehlung |
+| `Eniac_Discount-Strategy_Pilot_2026-11-13_vFinal.ipynb` | Pilot in Google Colab — Code, Checks, Pareto, Rabatt-Analyse, Code für alle Abbildungen der Präsentation |
+| `data / alle_marken_180.csv` | Alle 180 Marken nach bereinigter Marke, mit Umsatz und Stückzahl |
 
-> Hinweis: Umsatz = `unit_price × quantity` aus den verkauften Zeilen, nicht Katalogpreis. Gewinn ohne Einkaufspreise nicht berechenbar — wir sprechen bewusst von Umsatz und Rabattgeld, nicht von Gewinn.
+> Abgrenzung: Ausgewiesen wird Umsatz und Rabattgeld, nicht Gewinn. Ohne Einkaufspreise ist kein Gewinn berechenbar.
 
-## Wie man das liest
+## Lesehinweis
 
-Wenn du nur 2 Minuten hast: Lies die Tabelle oben. Wenn du 10 Minuten hast: Schau dir Folie 9 (Markenverteilung), Folie 10 (Preisklasse) und Folie 11 (【entity-Apple¦canonical_name=Apple】 48% Rabattgeld) an. Da steht die ganze Geschichte.
+2 Minuten: Tabelle unter „Drei Befunde" lesen.
+10 Minuten: Folie 9 (Markenverteilung), Folie 10 (Preisklasse), Folie 11 (Apple Rabattgeld) ansehen. Dort steht die gesamte Argumentation.
 
 ---
 
@@ -60,4 +105,4 @@ Wenn du nur 2 Minuten hast: Lies die Tabelle oben. Wenn du 10 Minuten hast: Scha
 
 Persönlich war die Sprache die größte Herausforderung.
 Ich habe viel Hilfe von Tim und Walter bekommen. Ohne sie wäre das nicht gegangen.
-Wir haben als Team wirklich gut gearbeitet. Manchmal haben wir uns auch außerhalb der Stunden getroffen. Das war notwendig und produktiv. Und es hat sich gelohnt.
+Wir haben als Team gut gearbeitet. Manchmal haben wir uns auch außerhalb der Stunden getroffen. Das war notwendig und produktiv. Und es hat sich gelohnt.
